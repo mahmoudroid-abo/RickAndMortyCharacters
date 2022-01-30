@@ -14,5 +14,4 @@ class RetrofitInstance {
             .build()
         }
     }
-
 }
