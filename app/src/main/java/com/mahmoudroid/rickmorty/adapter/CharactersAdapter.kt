@@ -1,5 +1,6 @@
 package com.mahmoudroid.rickmorty.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,41 +13,48 @@ import com.bumptech.glide.Glide
 import com.mahmoudroid.rickmorty.R
 import com.mahmoudroid.rickmorty.model.Characters
 
+private const val TAG = "#####"
+
 class CharactersAdapter :
-    PagingDataAdapter<Characters, CharactersAdapter.CharactersViewHolder>(DiffUtilCallBack()) {
+    PagingDataAdapter<Characters, CharactersAdapter.MyViewHolder>
+        (DiffUtilCallBack()) {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CharactersAdapter.CharactersViewHolder {
-        val inflater = LayoutInflater.from(parent.context).inflate(
-            R.layout.characters_list_item, parent, false
-        )
-        return CharactersViewHolder(inflater)
+    ): MyViewHolder {
+        val inflater =
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.characters_list_item, parent, false
+            )
+
+        return MyViewHolder(inflater)
     }
 
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-    override fun onBindViewHolder(holder: CharactersAdapter.CharactersViewHolder, position: Int) {
         holder.bind(getItem(position)!!)
+        Log.d(TAG, "#####: " + holder.itemId.toString())
     }
 
 
-    class CharactersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val characterImage: ImageView = view.findViewById(R.id.characterImage)
-        private val characterName: TextView = view.findViewById(R.id.characterName)
-        private val characterDescription: TextView = view.findViewById(R.id.characterDescription)
+        val imageView: ImageView = view.findViewById(R.id.characterImage)
+        val tvName: TextView = view.findViewById(R.id.characterName)
+        val tvDesc: TextView = view.findViewById(R.id.characterDescription)
 
-        fun bind(character: Characters) {
-            characterName.text = character.name
-            characterDescription.text = character.species
-
-            Glide.with(characterImage)
-                .load(character.image)
+        fun bind(data: Characters) {
+            tvName.text = data.name
+            tvDesc.text = data.species
+            Log.d(TAG, "bind: " + data.name.toString())
+            Glide.with(imageView)
+                .load(data.image)
                 .circleCrop()
-                .into(characterImage)
+                .into(imageView)
+
         }
     }
-
 
     class DiffUtilCallBack : DiffUtil.ItemCallback<Characters>() {
         override fun areItemsTheSame(oldItem: Characters, newItem: Characters): Boolean {
@@ -54,9 +62,8 @@ class CharactersAdapter :
         }
 
         override fun areContentsTheSame(oldItem: Characters, newItem: Characters): Boolean {
-            return oldItem.name == newItem.name &&
-                    oldItem.species == newItem.species
+            return oldItem.name == newItem.name
+                    && oldItem.species == newItem.species
         }
-
     }
 }
