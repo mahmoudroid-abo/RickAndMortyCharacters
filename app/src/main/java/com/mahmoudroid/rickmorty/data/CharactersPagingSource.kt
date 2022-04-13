@@ -30,7 +30,7 @@ class CharactersPagingSource(val apiService: ApiService) :
                 val nextPageQuery = uri.getQueryParameter("page")
                 nextPageNumber = nextPageQuery?.toInt()
 
-                Log.d(TAG, "####response: " + response.results.size)
+//                Log.d(TAG, "####response: " + response.results.size)
             }
             var prevPageNumber: Int? = null
             if (response?.info?.prev != null) {

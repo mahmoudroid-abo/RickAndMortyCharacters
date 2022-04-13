@@ -1,48 +1,43 @@
-package com.mahmoudroid.rickmorty
+package com.mahmoudroid.rickmorty.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mahmoudroid.rickmorty.R
 import com.mahmoudroid.rickmorty.adapter.CharactersAdapter
-import com.mahmoudroid.rickmorty.databinding.ActivityMainBinding
 import com.mahmoudroid.rickmorty.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.characters_fragment.*
 import kotlinx.coroutines.flow.collectLatest
 
+private const val TAG = "CharactersFragment"
 
-private const val TAG = "####MainActivity"
+class CharactersFragment : Fragment(R.layout.characters_fragment) {
 
-class MainActivity : AppCompatActivity() {
-
-
-    private lateinit var binding: ActivityMainBinding
     private lateinit var charactersAdapter: CharactersAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initRecyclerview()
         initViewModel()
+
     }
 
-    private fun initRecyclerview() {
 
-        binding.charactersRecyclerview.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
+    private fun initRecyclerview() {
+        charactersAdapter = CharactersAdapter()
+        charactersRecyclerview.apply {
+            adapter = charactersAdapter
+            layoutManager = LinearLayoutManager(activity)
             val decoration = DividerItemDecoration(
-                applicationContext,
+                context,
                 DividerItemDecoration.VERTICAL
             )
             addItemDecoration(decoration)
-
-            charactersAdapter = CharactersAdapter()
-            adapter = charactersAdapter
             Log.d(TAG, "####initRecyclerview: " + charactersAdapter.itemCount.toString())
         }
     }

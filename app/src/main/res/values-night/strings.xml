@@ -2,4 +2,6 @@
 <resources>
     <string name="profile_image">Profile Image</string>
     <string name="character_name">Character Name</string>
+    <string name="description">Description</string>
+    <string name="gender">Gender</string>
 </resources>

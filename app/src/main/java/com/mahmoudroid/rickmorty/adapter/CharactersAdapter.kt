@@ -34,24 +34,26 @@ class CharactersAdapter :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         holder.bind(getItem(position)!!)
-        Log.d(TAG, "#####: " + holder.itemId.toString())
+//        Log.d(TAG, "#####: " + holder.itemId.toString())
     }
 
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val imageView: ImageView = view.findViewById(R.id.characterImage)
-        val tvName: TextView = view.findViewById(R.id.characterName)
-        val tvDesc: TextView = view.findViewById(R.id.characterDescription)
+        val cahracterImage: ImageView = view.findViewById(R.id.characterImage)
+        val characterName: TextView = view.findViewById(R.id.characterName)
+        val characterDescription: TextView = view.findViewById(R.id.characterDescription)
+        val characterGender : TextView = view.findViewById(R.id.characterGender)
 
         fun bind(data: Characters) {
-            tvName.text = data.name
-            tvDesc.text = data.species
+            characterName.text = data.name
+            characterDescription.text = data.species
+            characterGender.text = data.gender
             Log.d(TAG, "bind: " + data.name.toString())
-            Glide.with(imageView)
+            Glide.with(cahracterImage)
                 .load(data.image)
                 .circleCrop()
-                .into(imageView)
+                .into(cahracterImage)
 
         }
     }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/charactersFragment">
+    <fragment
+        android:id="@+id/charactersFragment"
+        android:name="com.mahmoudroid.rickmorty.ui.CharactersFragment"
+        android:label="CharactersFragment"
+        tools:layout="@layout/characters_fragment">
+        <action
+            android:id="@+id/action_charactersFragment_to_characterDetails"
+            app:destination="@id/characterDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetails"
+        android:name="com.mahmoudroid.rickmorty.ui.CharacterDetails"
+        android:label="CharacterDetails"
+        tools:layout="@layout/details_character"/>
+</navigation>
