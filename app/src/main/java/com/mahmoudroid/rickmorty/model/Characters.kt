@@ -1,5 +1,7 @@
 package com.mahmoudroid.rickmorty.model
 
+import java.io.Serializable
+
 data class Characters(
     val created: String,
     val episode: List<String>,
@@ -13,4 +15,4 @@ data class Characters(
     val status: String,
     val type: String,
     val url: String
-)
+) : Serializable

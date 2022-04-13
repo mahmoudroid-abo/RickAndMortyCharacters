@@ -19,6 +19,8 @@ class CharactersAdapter :
     PagingDataAdapter<Characters, CharactersAdapter.MyViewHolder>
         (DiffUtilCallBack()) {
 
+    private var onItemClickListener: ((Characters) -> Unit)? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -34,6 +36,13 @@ class CharactersAdapter :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         holder.bind(getItem(position)!!)
+        holder.itemView.apply {
+
+            val character = getItem(position)!!
+            setOnClickListener {
+                onItemClickListener?.let { it(character) }
+            }
+        }
 //        Log.d(TAG, "#####: " + holder.itemId.toString())
     }
 
@@ -43,7 +52,7 @@ class CharactersAdapter :
         val cahracterImage: ImageView = view.findViewById(R.id.characterImage)
         val characterName: TextView = view.findViewById(R.id.characterName)
         val characterDescription: TextView = view.findViewById(R.id.characterDescription)
-        val characterGender : TextView = view.findViewById(R.id.characterGender)
+        val characterGender: TextView = view.findViewById(R.id.characterGender)
 
         fun bind(data: Characters) {
             characterName.text = data.name
@@ -56,6 +65,10 @@ class CharactersAdapter :
                 .into(cahracterImage)
 
         }
+    }
+
+    fun setOnItemClickListener(listener: (Characters) -> Unit) {
+        onItemClickListener = listener
     }
 
     class DiffUtilCallBack : DiffUtil.ItemCallback<Characters>() {
