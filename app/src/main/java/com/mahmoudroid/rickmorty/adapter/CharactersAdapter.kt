@@ -57,7 +57,11 @@ class CharactersAdapter :
         fun bind(data: Characters) {
             characterName.text = data.name
             characterDescription.text = data.species
+            if (data.gender == "Female") {
+                characterGender.setTextColor(cahracterImage.resources.getColor(R.color.pink))
+            }
             characterGender.text = data.gender
+
             Log.d(TAG, "bind: " + data.name.toString())
             Glide.with(cahracterImage)
                 .load(data.image)
