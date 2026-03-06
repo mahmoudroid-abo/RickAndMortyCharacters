@@ -58,13 +58,6 @@ class CharactersFragment : Fragment(R.layout.characters_fragment) {
         binding.charactersRecyclerview.apply {
             adapter = charactersAdapter
             layoutManager = LinearLayoutManager(activity)
-
-            val decoration = DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-
-            addItemDecoration(decoration)
         }
 
         charactersAdapter.addLoadStateListener { loadState ->
