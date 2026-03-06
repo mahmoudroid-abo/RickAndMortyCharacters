@@ -1,7 +1,6 @@
 package com.mahmoudroid.rickmorty.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoudroid.rickmorty.R
@@ -54,15 +54,18 @@ class CharactersFragment : Fragment(R.layout.characters_fragment) {
 
     private fun initRecyclerview() {
         charactersAdapter = CharactersAdapter()
+
         binding.charactersRecyclerview.apply {
             adapter = charactersAdapter
             layoutManager = LinearLayoutManager(activity)
-            val decoration = DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-            addItemDecoration(decoration)
-            Log.d(TAG, "####initRecyclerview: " + charactersAdapter.itemCount.toString())
+        }
+
+        charactersAdapter.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
         }
     }
 
@@ -74,5 +77,4 @@ class CharactersFragment : Fragment(R.layout.characters_fragment) {
             }
         }
     }
-
 }
