@@ -1,4 +1,4 @@
-package com.mahmoudroid.rickmorty.ui
+package com.mahmoudroid.rickmorty.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahmoudroid.rickmorty.R
 import com.mahmoudroid.rickmorty.adapter.CharactersAdapter

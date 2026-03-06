@@ -17,5 +17,9 @@
         android:id="@+id/characterDetails"
         android:name="com.mahmoudroid.rickmorty.ui.CharacterDetails"
         android:label="CharacterDetails"
-        tools:layout="@layout/details_character"/>
+        tools:layout="@layout/character_details_fragment">
+        <argument
+            android:name="character"
+            app:argType="com.mahmoudroid.rickmorty.model.Characters" />
+    </fragment>
 </navigation>
