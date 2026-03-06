@@ -8,7 +8,6 @@ Simple App Consumes The https://rickandmortyapi.com/ API to get and Display Rick
    - Kotlin.<br/>
    - MVVM architectural pattern.<br/>
    - kotlin Coroutines.<br/>
-   - LiveData .<br/>
    - Pagging.<br/>
    - View Model .<br/>
    - View Binding.<br/>
