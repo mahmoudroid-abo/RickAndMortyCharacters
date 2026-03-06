@@ -15,4 +15,8 @@
         <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
 
     </style>
+
+    <style name="RoundedImage">
+        <item name="cornerSize">12dp</item>
+    </style>
 </resources>
