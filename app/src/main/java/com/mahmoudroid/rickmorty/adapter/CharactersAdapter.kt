@@ -13,8 +13,7 @@ import com.bumptech.glide.Glide
 import com.mahmoudroid.rickmorty.R
 import com.mahmoudroid.rickmorty.model.Characters
 
-private const val TAG = "#####"
-
+private const val TAG = "CharactersAdapter"
 class CharactersAdapter :
     PagingDataAdapter<Characters, CharactersAdapter.MyViewHolder>
         (DiffUtilCallBack()) {

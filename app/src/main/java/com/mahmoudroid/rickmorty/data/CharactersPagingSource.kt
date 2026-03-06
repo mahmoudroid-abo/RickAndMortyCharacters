@@ -5,9 +5,9 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mahmoudroid.rickmorty.model.Characters
+import androidx.core.net.toUri
 
-private const val TAG = "####"
-
+private const val TAG = "CharactersPagingSource"
 class CharactersPagingSource(val apiService: ApiService) :
     PagingSource<Int, Characters>() {
 
@@ -25,16 +25,14 @@ class CharactersPagingSource(val apiService: ApiService) :
             val response = apiService.getCharacters(nextPage)
 
             var nextPageNumber: Int? = null
-            if (response?.info?.next != null) {
-                val uri = Uri.parse(response?.info?.next!!)
+            response.info.next?.let {
+                val uri = response.info.next.toUri()
                 val nextPageQuery = uri.getQueryParameter("page")
                 nextPageNumber = nextPageQuery?.toInt()
-
-//                Log.d(TAG, "####response: " + response.results.size)
             }
             var prevPageNumber: Int? = null
-            if (response?.info?.prev != null) {
-                val uri = Uri.parse(response?.info?.prev!!)
+            response.info.prev?.let {
+                val uri = response.info.prev.toUri()
                 val prevPageQuery = uri.getQueryParameter("page")
 
                 prevPageNumber = prevPageQuery?.toInt()
