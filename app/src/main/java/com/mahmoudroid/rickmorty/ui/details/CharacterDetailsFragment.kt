@@ -25,6 +25,7 @@ class CharacterDetailsFragment  : Fragment(R.layout.character_details_fragment){
         binding.progressBar.visibility = View.VISIBLE
 
         Log.e(TAG, "onViewCreated: test " + character.name.toString())
+Log.e(TAG, "onViewCreated: test " + character.name.toString())
         binding.characterName.text = character.name
         binding.characterStatus.text = "Status: ${character.status}"
         binding.characterSpecies.text = "Species: ${character.species}"
